@@ -3,5 +3,3 @@
         .then(html => {
             document.getElementById('navbar').innerHTML = html;
         });
-
-        
