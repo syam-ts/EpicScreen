@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/style/movie.css" rel="stylesheet" />
+</head>
+<script src="/constants/moviesData.js"></script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get('title');
+    const selectedMovie = moviesData.filter(movie => movie.title.includes(title.trim()));
+    //  console.log('movi', moviesData, title, selectedMovie)
+</script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-section">
+            <img id="movie-poster" alt="Movie Poster" />
+        </div>
+        <div class="info-section">
+            <div class="title" id="movie-title">Loading...</div>
+            <div class="details" id="movie-year"></div>
+            <div class="details" id="movie-director"></div>
+            <div class="description" id="movie-description"></div>
+            <button class="back-btn" onclick="goBack()">← Back</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            if (!selectedMovie) {
+                document.body.innerHTML = '<p style="color: white; font-size: 1.5rem; text-align: center;">No movie data found.</p>';
+                return;
+            }
+            document.getElementById('movie-title').textContent = selectedMovie[0].title;
+            document.getElementById('movie-poster').src = selectedMovie[0].poster;
+            document.getElementById('movie-year').textContent = `Released: ${selectedMovie[0].year}`;
+            document.getElementById('movie-director').textContent = `Director: ${selectedMovie[0].director}`;
+            document.getElementById('movie-description').textContent = selectedMovie[0].description || 'No description available.';
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>
