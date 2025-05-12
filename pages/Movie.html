@@ -17,6 +17,10 @@
 </head>
 
 <body>
+    <!-- Navbar section -->
+      <div id="navbar"></div>
+      
+      <!-- Main body -->
     <div class="container">
         <div class="image-section">
             <img id="movie-poster" alt="Movie Poster" />
@@ -29,7 +33,7 @@
             <button class="back-btn" onclick="goBack()">← Back</button>
         </div>
     </div>
-
+      <script src="/scripts/index.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
@@ -37,14 +41,14 @@
                 document.body.innerHTML = '<p style="color: white; font-size: 1.5rem; text-align: center;">No movie data found.</p>';
                 return;
             }
-            document.getElementById('movie-title').textContent = selectedMovie[0].title;
+            document.getElementById('movie-title').textContent = `${selectedMovie[0].title}(${selectedMovie[0].year})`;
             document.getElementById('movie-poster').src = selectedMovie[0].poster;
             document.getElementById('movie-year').textContent = `Released: ${selectedMovie[0].year}`;
             document.getElementById('movie-director').textContent = `Director: ${selectedMovie[0].director}`;
             document.getElementById('movie-description').textContent = selectedMovie[0].description || 'No description available.';
         });
 
-        function goBack() {
+        const goBack = () => {
             window.history.back();
         }
     </script>
